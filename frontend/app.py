@@ -3,7 +3,7 @@ import requests
 import os
 
 # Config
-API_URL = os.getenv("API_URL", "http://localhost:8000/chat")
+API_URL = os.getenv("API_URL", "http://18.205.185.157:8000/chat")
 
 # Page config
 st.set_page_config(

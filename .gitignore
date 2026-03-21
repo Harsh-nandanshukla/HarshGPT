@@ -4,6 +4,8 @@ bot/
 # Environment variables
 .env
 
+*.pem
+
 # Python cache
 __pycache__/
 *.pyc
