@@ -12,7 +12,7 @@
 
 ## 📌 What is HarshGPT?
 
-HarshGPT is a **production-grade RAG (Retrieval-Augmented Generation) chatbot** that answers natural-language questions strictly grounded in 5 personal documents — internship reports, project reports, and a resume (~75 chunks). It is fully containerised, deployed on AWS EC2, and served via a Streamlit Cloud frontend.
+HarshGPT is a **production-grade RAG (Retrieval-Augmented Generation) chatbot** that answers natural-language questions strictly grounded in 5 personal documents — internship reports, project reports, and a resume . It is fully containerised, deployed on AWS EC2, and served via a Streamlit Cloud frontend.
 
 ---
 
