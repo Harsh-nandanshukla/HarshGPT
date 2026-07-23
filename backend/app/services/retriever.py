@@ -8,11 +8,14 @@ from qdrant_client.models import Filter, FieldCondition, MatchValue
 load_dotenv()
 
 # Config
-QDRANT_URL = f"http://{os.getenv('QDRANT_HOST', 'localhost')}:6333"
+# QDRANT_URL = f"http://{os.getenv('QDRANT_HOST', 'localhost')}:6333"
+QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 COLLECTION_NAME = "harshgpt"
 
 # Init
-client = QdrantClient(url=QDRANT_URL)
+# client = QdrantClient(url=QDRANT_URL)
+client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
 # Vector Store

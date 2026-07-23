@@ -12,7 +12,7 @@ from slowapi.errors import RateLimitExceeded
 
 
 try:
-    from llm_chain import get_answer       # Local ✅
+    from llm_chain import get_answer       
 except ImportError:
     from app.services.llm_chain import get_answer 
 

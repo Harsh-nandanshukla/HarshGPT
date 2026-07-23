@@ -4,20 +4,23 @@ from langchain_community.document_loaders import PDFPlumberLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, VectorParams, PointStruct
+from qdrant_client.models import Distance, VectorParams, PointStruct,PayloadSchemaType
 # import uuid
 import hashlib
 
 load_dotenv()
 
 # Config
-QDRANT_URL = f"http://{os.getenv('QDRANT_HOST', 'localhost')}:6333"
+# QDRANT_URL = f"http://{os.getenv('QDRANT_HOST', 'localhost')}:6333"
+QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 COLLECTION_NAME = "harshgpt"
 PDF_DIR = os.path.join(os.path.dirname(__file__), "../../database")
 
 # Init
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
-client = QdrantClient(url=QDRANT_URL)
+# client = QdrantClient(url=QDRANT_URL)
+client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
 
 def load_and_chunk_pdfs():
     all_chunks = []
@@ -59,6 +62,12 @@ def store_in_qdrant(chunks):
                 distance=Distance.COSINE
             )
         )
+        client.create_payload_index(
+        collection_name=COLLECTION_NAME,
+        field_name="metadata.source",
+        field_schema=PayloadSchemaType.KEYWORD
+        )
+        
         print(f"Collection '{COLLECTION_NAME}' created ")
     else:
         print(f"Collection '{COLLECTION_NAME}' already exists ")
